@@ -6,5 +6,9 @@ class JpnBible < Sinatra::Base
     register Sinatra::Reloader
   end
 
+  get '/' do
+    redirect '/kougo/'
+  end
+
   # renders /public
 end
