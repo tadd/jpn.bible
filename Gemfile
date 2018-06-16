@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
 
-ruby '2.5' if ENV['DYNO']
+ruby '~> 2.5.1' if ENV['DYNO']
 
 gem 'sinatra'
