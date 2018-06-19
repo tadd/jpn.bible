@@ -22,8 +22,10 @@ class JpnBible < Sinatra::Base
     BOOKS.each do |book|
       path = [prefix, book].join('/')
 
-      get(/#{path}.html?/) do
-        redirect path, 301
+      %w[htm html xhtml].each do |ext|
+        get "#{path}.#{ext}" do
+          redirect path, 301
+        end
       end
 
       get path do
