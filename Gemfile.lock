@@ -1,5 +1,6 @@
-PATH
+GIT
   remote: ../osis2html5
+  revision: 0d5265762d4de211d27c8e7472321015a80c0e1d
   specs:
     osis2html5 (0.1.0)
       nokogiri (> 0)
