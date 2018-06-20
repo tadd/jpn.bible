@@ -9,5 +9,5 @@ group :development, :test do
   gem 'sinatra-contrib'
   gem 'test-unit'
   gem 'rake'
-  gem 'osis2html5', git: '../osis2html5' unless ENV['DYNO'] # not needed while deploy
+  gem 'osis2html5', git: '../osis2html5'
 end
