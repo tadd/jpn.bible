@@ -4,8 +4,9 @@ require_relative 'app'
 TARGETS = FileList[JpnBible::BOOKS + %w[index]].pathmap('bibles/kougo/%f.html')
 SOURCE = 'vendor/bibles/kougo.osis'
 ERBS = TARGETS.pathmap('tmp/erb/%f.erb')
-HEAD = <<EOS.chomp # add bootstrap
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+HEAD = <<EOS.chomp # add bootstrap things
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"/>
 EOS
 
 CLEAN.concat(ERBS)
