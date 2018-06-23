@@ -1,4 +1,5 @@
 require 'rake/clean'
+require 'erb'
 require_relative 'app'
 
 TARGETS = FileList[JpnBible::BOOKS + %w[index]].pathmap('bibles/kougo/%f.html')
@@ -17,13 +18,19 @@ task default: %w[kougo]
 desc 'generate Kougo bible HTMLs'
 task kougo: TARGETS
 
-def var_table
-  %(head='#{HEAD}')
+VAR_TABLE = {
+  head: HEAD
+}
+
+def erb(source_file, dest_file, vars = {})
+  applied = ERB.new(File.read(source_file)).result_with_hash(vars)
+  File.write(dest_file, applied)
 end
+
 
 TARGETS.zip(ERBS).each do |target, erb|
   file target => erb do |t|
-    sh "erb #{var_table} #{t.source} >#{t.name}"
+    erb(t.source, t.name, VAR_TABLE)
     sh "sed -i 's/\\.html//g' #{t.name}" if t.name.end_with?('index.html')
   end
 end
