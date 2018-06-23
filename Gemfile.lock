@@ -1,10 +1,3 @@
-PATH
-  remote: ../osis2html5
-  specs:
-    osis2html5 (0.1.0)
-      nokogiri (> 0)
-      parallel (> 0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -17,13 +10,9 @@ GEM
     concurrent-ruby (1.0.5)
     i18n (1.0.1)
       concurrent-ruby (~> 1.0)
-    mini_portile2 (2.3.0)
     minitest (5.11.3)
     multi_json (1.13.1)
     mustermann (1.0.2)
-    nokogiri (1.8.3)
-      mini_portile2 (~> 2.3.0)
-    parallel (1.12.1)
     power_assert (1.1.2)
     puma (3.11.4)
     rack (2.0.5)
@@ -54,7 +43,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  osis2html5!
   puma
   rake
   sinatra
