@@ -9,5 +9,5 @@ group :development, :test do
   gem 'sinatra-contrib'
   gem 'test-unit'
   gem 'rake'
-  gem 'osis2html5', '> 0', path: '../osis2html5'
+  gem 'osis2html5', '0.1.0', path: '../osis2html5'
 end
