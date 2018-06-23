@@ -1,5 +1,5 @@
 PATH
-  remote: ../osis2html5
+  remote: vendor/osis2html5
   specs:
     osis2html5 (0.1.0)
       nokogiri (> 0)
@@ -54,7 +54,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  osis2html5 (= 0.1.0)!
+  osis2html5!
   puma
   rake
   sinatra
