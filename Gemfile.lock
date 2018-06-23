@@ -1,5 +1,6 @@
-PATH
-  remote: /home/tadashi/git/osis2html5
+GIT
+  remote: /home/tadashi/git/jpn-bible/../osis2html5
+  revision: 038ff4b3eae8d605c9d46feb33950f70d985bea4
   specs:
     osis2html5 (0.1.0)
       nokogiri (> 0)
