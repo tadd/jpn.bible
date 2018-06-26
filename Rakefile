@@ -12,15 +12,15 @@ BOOKS =
     matt mark luke john acts rom 1cor 2cor gal eph phil col 1thess 2thess 1tim 2tim titus phlm
     heb jas 1pet 2pet 1john 2john 3john jude rev
   ]
-TARGETS = FileList[BOOKS + %w[index]].pathmap('bibles/kougo/%f.html')
-SOURCE = 'vendor/bibles/kougo.osis'
+TARGETS = FileList[BOOKS + %w[index]].pathmap('public/kougo/%f.html')
+SOURCE = 'vendor/kougo.osis'
 ERBS = TARGETS.pathmap('tmp/erb/%f.erb')
 HEAD = <<EOS.chomp # add bootstrap things
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"/>
 EOS
 
-CLEAN.concat(ERBS)
+CLEAN.concat(ERBS + [SOURCE])
 CLOBBER.concat(TARGETS)
 
 task default: %w[kougo]
@@ -37,6 +37,9 @@ def erb(source_file, dest_file, vars = {})
   File.write(dest_file, applied)
 end
 
+file SOURCE => SOURCE + '.zip' do |t|
+  sh "unzip -p #{t.source} > #{t.name}"
+end
 
 TARGETS.zip(ERBS).each do |target, erb|
   file target => erb do |t|
