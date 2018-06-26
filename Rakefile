@@ -46,14 +46,9 @@ TARGETS.zip(ERBS).each do |target, erb|
     erb(t.source, t.name, VAR_TABLE)
     sh "sed -i 's/\\.html//g' #{t.name}" if t.name.end_with?('index.html')
   end
-end
 
-desc 'generate temporary *.html.erb files'
-task erb: SOURCE do |t|
-  sh 'mkdir -p tmp/erb'
-  sh "bundle exec osis2html5 --erb #{t.source} tmp/erb/"
-end
-
-ERBS.each do |erb|
-  task erb => :erb
+  file erb => SOURCE do |t|
+    sh 'mkdir -p tmp/erb'
+    sh "bundle exec osis2html5 --erb #{t.source} tmp/erb/"
+  end
 end
