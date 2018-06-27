@@ -18,7 +18,10 @@ ERBS = TARGETS.pathmap('tmp/erb/%f.erb')
 HEAD = <<EOS.chomp # add bootstrap things
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"/>
+<link rel="canonical" href="%<url>s"/>
+<meta property="og:url" content="%<url>s"/>
 EOS
+BASE_URL = 'https://jpn.bible/kougo/'
 
 CLEAN.concat(ERBS + [SOURCE])
 CLOBBER.concat(TARGETS)
@@ -28,13 +31,24 @@ task default: %w[kougo]
 desc 'generate Kougo bible HTMLs'
 task kougo: TARGETS
 
-VAR_TABLE = {
-  head: HEAD
-}
-
 def erb(source_file, dest_file, vars = {})
   applied = ERB.new(File.read(source_file)).result_with_hash(vars)
   File.write(dest_file, applied)
+end
+
+def filename_to_url(filename)
+  base = File.basename(filename, '.html')
+  if base == 'index'
+    BASE_URL
+  else
+    BASE_URL + base
+  end
+end
+
+def var_table(filename)
+  {
+    head: format(HEAD, url: filename_to_url(filename))
+  }
 end
 
 file SOURCE => SOURCE + '.zip' do |t|
@@ -43,7 +57,7 @@ end
 
 TARGETS.zip(ERBS).each do |target, erb|
   file target => erb do |t|
-    erb(t.source, t.name, VAR_TABLE)
+    erb(t.source, t.name, var_table(t.name))
     sh "sed -i 's/\\.html//g' #{t.name}" if t.name.end_with?('index.html')
   end
 
