@@ -1,0 +1,12 @@
+body {
+    line-height: 2;
+}
+
+h1, h2, h3 {
+    margin: 1em 0 0.5em 0;
+}
+
+.verse-number {
+    vertical-align: super;
+    font-size: smaller;
+}

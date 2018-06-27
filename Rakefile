@@ -20,6 +20,7 @@ HEAD = <<EOS.chomp # add bootstrap things
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"/>
 <link rel="canonical" href="%<url>s"/>
 <meta property="og:url" content="%<url>s"/>
+<link rel="stylesheet" href="/css/global.css"/>
 EOS
 BASE_URL = 'https://jpn.bible/kougo/'
 
