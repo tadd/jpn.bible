@@ -16,6 +16,14 @@ TARGETS = FileList[BOOKS + %w[index]].pathmap('public/kougo/%f.html')
 SOURCE = 'vendor/kougo.osis'
 ERBS = TARGETS.pathmap('tmp/erb/%f.erb')
 HEAD = <<EOS.chomp # add bootstrap things
+<script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-1773020-8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '#{ENV.fetch("GTAG_TRACKING_ID")}');
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"/>
 <link rel="canonical" href="%<url>s"/>
