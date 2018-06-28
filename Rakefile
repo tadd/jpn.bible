@@ -65,7 +65,7 @@ file SOURCE => SOURCE + '.zip' do |t|
 end
 
 TARGETS.zip(ERBS).each do |target, erb|
-  file target => erb do |t|
+  file target => [erb, __FILE__] do |t|
     erb(t.source, t.name, var_table(t.name))
     sh "sed -i 's/\\.html//g' #{t.name}" if t.name.end_with?('index.html')
   end
