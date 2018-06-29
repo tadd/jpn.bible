@@ -69,20 +69,26 @@ def filename_to_url(filename)
   end
 end
 
-def var_table(filename, additional_title, prefetches: false)
+def var_table(filename, additional_title, prefetches: false, preloads: false)
   table = {
     head: format(HEAD, url: filename_to_url(filename)),
     additional_title: additional_title,
     head_of_body: NAV
   }
   table[:head] << prefetch_tags if prefetches
+  table[:head] << preload_tags if preloads
   table
 end
 
 def prefetch_tags
   %w[gen].map do |book|
     %(\n<link rel="next" href="#{book}"/>)
-  end.join
+  end.join +
+    %(\n<link rel="prefetch" href="/font/NotoSerifJP-Regular.woff2" as="font" type="font/woff2"/>)
+end
+
+def preload_tags
+  %(\n<link rel="preload" href="/font/NotoSerifJP-Regular.woff2" as="font" type="font/woff2"/>)
 end
 
 file SOURCE => SOURCE + '.zip' do |t|
@@ -97,7 +103,7 @@ TARGETS.zip(ERBS).each do |target, erb|
       erb(t.source, t.name, var_table(t.name, additional_title, prefetches: true))
       sh "sed -i 's/\\.html//g' #{t.name}"
     else # each book
-      erb(t.source, t.name, var_table(t.name, additional_title))
+      erb(t.source, t.name, var_table(t.name, additional_title, preloads: true))
     end
   end
 
