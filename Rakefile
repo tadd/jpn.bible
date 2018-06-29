@@ -80,7 +80,7 @@ def var_table(filename, additional_title, prefetches: false)
 end
 
 def prefetch_tags
-  BOOKS.map do |book|
+  %w[gen].map do |book|
     %(\n<link rel="next" href="./#{book}"/>)
   end.join
 end
