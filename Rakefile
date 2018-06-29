@@ -69,12 +69,20 @@ def filename_to_url(filename)
   end
 end
 
-def var_table(filename, additional_title)
-  {
+def var_table(filename, additional_title, prefetches: false)
+  table = {
     head: format(HEAD, url: filename_to_url(filename)),
     additional_title: additional_title,
     head_of_body: NAV
   }
+  table[:head] << prefetch_tags if prefetches
+  table
+end
+
+def prefetch_tags
+  BOOKS.map do |book|
+    %(\n<link rel="next" href="./#{book}"/>)
+  end.join
 end
 
 file SOURCE => SOURCE + '.zip' do |t|
@@ -85,8 +93,12 @@ TARGETS.zip(ERBS).each do |target, erb|
   file target => [erb, __FILE__] do |t|
     additional_title = GLOBAL_ADDTIONAL_TITLE.dup
     additional_title.prepend(" (#{VERSION_NAME[:kougo]})") unless t.name.end_with?('index.html')
-    erb(t.source, t.name, var_table(t.name, additional_title))
-    sh "sed -i 's/\\.html//g' #{t.name}" if t.name.end_with?('index.html')
+    if t.name.end_with?('index.html')
+      erb(t.source, t.name, var_table(t.name, additional_title, prefetches: true))
+      sh "sed -i 's/\\.html//g' #{t.name}"
+    else # each book
+      erb(t.source, t.name, var_table(t.name, additional_title))
+    end
   end
 
   file erb => SOURCE do |t|
