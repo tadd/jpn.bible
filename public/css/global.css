@@ -11,3 +11,7 @@ h1, h2, h3 {
     vertical-align: super;
     font-size: smaller;
 }
+
+.container {
+    margin-top: 100px;
+}

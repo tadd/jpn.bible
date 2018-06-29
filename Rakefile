@@ -33,6 +33,14 @@ HEAD = <<EOS.chomp # add bootstrap things
 <link rel="icon" type="image/svg+xml" href="/img/logo.svg"/>
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
 EOS
+NAV = <<EOS.chomp
+<nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top">
+<a class="navbar-brand" href="/">
+<img src="/img/logo.svg" width="30" height="30"/>
+jpn.bible
+</a>
+</nav>
+EOS
 BASE_URL = 'https://jpn.bible/kougo/'
 VERSION_NAME = {
   kougo: '口語訳聖書 1954/1955版'
@@ -64,7 +72,8 @@ end
 def var_table(filename, additional_title)
   {
     head: format(HEAD, url: filename_to_url(filename)),
-    additional_title: additional_title
+    additional_title: additional_title,
+    head_of_body: NAV
   }
 end
 
