@@ -81,7 +81,7 @@ end
 
 def prefetch_tags
   %w[gen].map do |book|
-    %(\n<link rel="next" href="./#{book}"/>)
+    %(\n<link rel="next" href="#{book}"/>)
   end.join
 end
 
