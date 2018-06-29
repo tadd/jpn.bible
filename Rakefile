@@ -30,6 +30,8 @@ HEAD = <<EOS.chomp # add bootstrap things
 <link rel="canonical" href="%<url>s"/>
 <meta property="og:url" content="%<url>s"/>
 <link rel="stylesheet" href="/css/global.css"/>
+<link rel="icon" type="image/svg+xml" href="/img/logo.svg"/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
 EOS
 BASE_URL = 'https://jpn.bible/kougo/'
 VERSION_NAME = {
