@@ -31,6 +31,10 @@ HEAD = <<EOS.chomp # add bootstrap things
 <link rel="stylesheet" href="/css/global.css"/>
 EOS
 BASE_URL = 'https://jpn.bible/kougo/'
+VERSION_NAME = {
+  kougo: '口語訳聖書 1954/1955版'
+}
+GLOBAL_ADDTIONAL_TITLE = ' - jpn.bible'
 
 CLEAN.concat(ERBS + [SOURCE])
 CLOBBER.concat(TARGETS)
@@ -54,9 +58,10 @@ def filename_to_url(filename)
   end
 end
 
-def var_table(filename)
+def var_table(filename, additional_title)
   {
-    head: format(HEAD, url: filename_to_url(filename))
+    head: format(HEAD, url: filename_to_url(filename)),
+    additional_title: additional_title
   }
 end
 
@@ -66,7 +71,9 @@ end
 
 TARGETS.zip(ERBS).each do |target, erb|
   file target => [erb, __FILE__] do |t|
-    erb(t.source, t.name, var_table(t.name))
+    additional_title = GLOBAL_ADDTIONAL_TITLE.dup
+    additional_title.prepend(" (#{VERSION_NAME[:kougo]})") unless t.name.end_with?('index.html')
+    erb(t.source, t.name, var_table(t.name, additional_title))
     sh "sed -i 's/\\.html//g' #{t.name}" if t.name.end_with?('index.html')
   end
 
