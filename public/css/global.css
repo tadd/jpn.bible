@@ -26,3 +26,13 @@ h1, h2, h3 {
 .verse-content {
     font-family: 'Noto Serif JP', serif;
 }
+
+/* fixme: remove these hacks! */
+.verse-number {
+    font-family: initial;
+}
+
+p {
+    font-family: 'Noto Serif JP', serif;
+}
+/* fixme: end */
