@@ -1,5 +1,6 @@
 require 'rake/clean'
 require 'erb'
+require 'fileutils'
 
 BOOKS =
   # old
@@ -97,7 +98,7 @@ end
 
 TARGETS.zip(ERBS).each do |target, erb|
   file target => [erb, __FILE__] do |t|
-    Dir.mkdir('public/kougo') unless Dir.exist?('public/kougo')
+    FileUtils.mkdir_p('public/kougo')
     additional_title = GLOBAL_ADDTIONAL_TITLE.dup
     additional_title.prepend(" (#{VERSION_NAME[:kougo]})") unless t.name.end_with?('index.html')
     if t.name.end_with?('index.html')
@@ -109,7 +110,7 @@ TARGETS.zip(ERBS).each do |target, erb|
   end
 
   file erb => SOURCE do |t|
-    sh 'mkdir -p tmp/erb'
+    FileUtils.mkdir_p('tmp/erb')
     sh "bundle exec osis2html5 --erb #{t.source} tmp/erb/"
   end
 end
