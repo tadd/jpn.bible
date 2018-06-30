@@ -16,7 +16,7 @@ TARGETS = FileList[BOOKS + %w[index]].pathmap('public/kougo/%f.html')
 SOURCE = 'vendor/kougo.osis'
 ERBS = TARGETS.pathmap('tmp/erb/%f.erb')
 GTAG_TRACKING_ID = ENV.fetch('GTAG_TRACKING_ID')
-HEAD = <<EOS.chomp # add bootstrap things
+HEAD = <<EOS.chomp
 <script async="async" src="https://www.googletagmanager.com/gtag/js?id=#{GTAG_TRACKING_ID}"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
