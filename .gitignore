@@ -4,3 +4,4 @@
 /vendor/bundle/
 /vendor/*.osis
 .envrc
+/public/kougo/
