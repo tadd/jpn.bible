@@ -97,6 +97,7 @@ end
 
 TARGETS.zip(ERBS).each do |target, erb|
   file target => [erb, __FILE__] do |t|
+    Dir.mkdir('public/kougo') unless Dir.exist?('public/kougo')
     additional_title = GLOBAL_ADDTIONAL_TITLE.dup
     additional_title.prepend(" (#{VERSION_NAME[:kougo]})") unless t.name.end_with?('index.html')
     if t.name.end_with?('index.html')
