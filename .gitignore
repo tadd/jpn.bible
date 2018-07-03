@@ -5,3 +5,4 @@
 /vendor/*.osis
 .envrc
 /public/kougo/
+/public/*.html

@@ -47,11 +47,12 @@ VERSION_NAME = {
   kougo: '口語訳聖書 1954/1955版'
 }
 GLOBAL_ADDTIONAL_TITLE = ' - jpn.bible'
+TOP_TITLE = 'jpn.bible - 日本語フリー聖書ポータル'
 
 CLEAN.concat(ERBS + [SOURCE])
-CLOBBER.concat(TARGETS)
+CLOBBER.concat(TARGETS + %w[public/index.html])
 
-task default: %w[kougo]
+task default: %w[kougo root]
 
 desc 'generate Kougo bible HTMLs'
 task kougo: TARGETS
@@ -113,4 +114,10 @@ TARGETS.zip(ERBS).each do |target, erb|
     FileUtils.mkdir_p('tmp/erb')
     sh "bundle exec osis2html5 --erb #{t.source} tmp/erb/"
   end
+end
+
+task root: %w[public/index.html]
+
+file 'public/index.html' => 'template/index.html.erb' do |t|
+  erb(t.source, t.name, title: TOP_TITLE, gtag_tracking_id: GTAG_TRACKING_ID)
 end
