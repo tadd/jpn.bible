@@ -37,3 +37,15 @@ p {
     font-family: 'Noto Serif JP', serif;
 }
 /* fixme: end */
+
+/*
+ * fix hidden anchor behind navbar
+ * https://github.com/twbs/bootstrap/issues/1768#issuecomment-46519033
+ */
+.chapter-title:before {
+    display: block;
+    content: " ";
+    margin-top: -75px;
+    height: 75px;
+    visibility: hidden;
+}
