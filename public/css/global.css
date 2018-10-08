@@ -49,3 +49,8 @@ p {
     height: 75px;
     visibility: hidden;
 }
+
+/* ditto for inline https://stackoverflow.com/a/13117744 */
+.verse {
+    padding-top: 80px;
+}
