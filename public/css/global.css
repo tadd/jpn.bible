@@ -28,6 +28,10 @@ h1, h2, h3 {
     font-family: 'Noto Serif JP', serif;
 }
 
+p {
+    text-indent: 1em;
+}
+
 /* fixme: remove these hacks! */
 .verse-number {
     font-family: initial;
