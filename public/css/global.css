@@ -16,14 +16,6 @@ h1, h2, h3 {
     margin-top: 100px;
 }
 
-@font-face {
-    font-family: 'Noto Serif JP';
-    font-style: normal;
-    font-weight: normal;
-    font-display: swap;
-    src: url('/font/NotoSerifJP-Regular.woff2') format('woff2');
-}
-
 .verse-content {
     font-family: 'Noto Serif JP', serif;
 }

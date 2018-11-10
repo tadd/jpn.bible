@@ -28,6 +28,7 @@ HEAD = <<EOS.chomp
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link href="https://google-fonts-font-display-swap.netlify.com/google-fonts.css" rel="stylesheet"/>
 <link rel="canonical" href="%<url>s"/>
 <meta property="og:url" content="%<url>s"/>
 <link rel="stylesheet" href="/css/global.css"/>
@@ -85,12 +86,11 @@ end
 def prefetch_tags
   %w[gen].map do |book|
     %(\n<link rel="next" href="#{book}"/>)
-  end.join +
-    %(\n<link rel="prefetch" href="/font/NotoSerifJP-Regular.woff2" as="font" type="font/woff2"/>)
+  end.join
 end
 
 def preload_tags
-  %(\n<link rel="preload" href="/font/NotoSerifJP-Regular.woff2" as="font" type="font/woff2"/>)
+  ''
 end
 
 file SOURCE => SOURCE + '.zip' do |t|
