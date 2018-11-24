@@ -1,5 +1,5 @@
 GIT
-  remote: https://gitlab.com/tadd0/osis2html5.git
+  remote: https://github.com/tadd/osis2html5.git
   revision: eee973a97d4650ca1df6ed4437192794fd49b6b8
   specs:
     osis2html5 (0.1.0)
@@ -23,4 +23,4 @@ DEPENDENCIES
   rake
 
 BUNDLED WITH
-   1.16.5
+   1.17.1
