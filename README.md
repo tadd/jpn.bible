@@ -16,5 +16,5 @@ AGPL3です。[LICENSE](LICENSE)ファイルをご覧ください。
 
 ## 貢献するには
 
-GitHub https://github.com/tadd/jpn-bible でのバグ報告とプルリクエスト
+GitHub https://github.com/tadd/jpn.bible でのバグ報告とプルリクエスト
 を歓迎します。
