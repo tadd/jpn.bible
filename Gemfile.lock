@@ -1,5 +1,5 @@
 GIT
-  remote: https://github.com/tadd/osis2html5.git
+  remote: git://github.com/tadd/osis2html5.git
   revision: f526cd70aa8e6814d5af4b1f4d47ca06c83c91f3
   specs:
     osis2html5 (0.1.0)
@@ -10,9 +10,9 @@ GEM
   remote: https://rubygems.org/
   specs:
     mini_portile2 (2.4.0)
-    nokogiri (1.10.4)
+    nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
-    parallel (1.17.0)
+    parallel (1.19.1)
     rake (12.3.3)
 
 PLATFORMS
