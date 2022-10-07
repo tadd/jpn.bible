@@ -41,8 +41,8 @@ p {
     font-size: smaller;
 }
 
-.container {
-    margin-top: 7.5rem;
+.container-fluid {
+    width: 90%;
 }
 
 .verse-content {
