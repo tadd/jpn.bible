@@ -1,2 +1,8 @@
+/
+  Content-Type: application/xhtml+xml
 /*.html
+  Content-Type: application/xhtml+xml
+/kougo/
+  Content-Type: application/xhtml+xml
+/kougo/*
   Content-Type: application/xhtml+xml
