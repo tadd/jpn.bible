@@ -9,8 +9,8 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    mini_portile2 (2.8.5)
-    nokogiri (1.16.2)
+    mini_portile2 (2.8.6)
+    nokogiri (1.16.5)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     parallel (1.24.0)
