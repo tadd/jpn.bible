@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/tadd/osis2html5.git
-  revision: 0faec1e153008dd7263f05d5fda1b53e7dda2ccc
+  revision: 516284f5e1de84d3e6af1a986a4d0fe52c4e2865
   specs:
     osis2html5 (0.1.0)
       nokogiri (> 0)
@@ -10,7 +10,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     mini_portile2 (2.8.8)
-    nokogiri (1.18.3)
+    nokogiri (1.18.5)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     parallel (1.26.3)
@@ -25,4 +25,4 @@ DEPENDENCIES
   rake
 
 BUNDLED WITH
-   2.6.4
+   2.6.6
