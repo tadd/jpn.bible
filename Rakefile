@@ -27,7 +27,7 @@ HEAD = <<EOS.chomp
   gtag('config', '#{GTAG_TRACKING_ID}');
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet"/>
 <link rel="canonical" href="%<url>s"/>
 <meta property="og:url" content="%<url>s"/>
