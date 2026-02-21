@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/tadd/osis2html5.git
-  revision: 5a90c085bb8e91a5ba091c26563a70e008905e0d
+  revision: be40e3dbd7e7c6988332e3d2647deda25aea6ca7
   specs:
     osis2html5 (0.1.1)
       nokogiri (> 0)
