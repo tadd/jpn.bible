@@ -39,9 +39,12 @@ TOP_TITLE = 'jpn.bible - 日本語フリー聖書ポータル'
 CLEAN.concat(ERBS + TARGETS + %w[public/index.html])
 CLOBBER.concat([SOURCE])
 
-task default: %w[kougo root]
+task default: :build
 
-desc 'generate Kougo bible HTMLs'
+desc 'Generate whole website'
+task build: %w[kougo root]
+
+desc 'Generate only Kougo bible HTMLs'
 task kougo: TARGETS
 
 def filename_to_url(filename)
