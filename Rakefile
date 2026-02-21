@@ -36,8 +36,8 @@ VERSION_NAME = {
 GLOBAL_ADDTIONAL_TITLE = ' - jpn.bible'
 TOP_TITLE = 'jpn.bible - 日本語フリー聖書ポータル'
 
-CLEAN.concat(ERBS + [SOURCE])
-CLOBBER.concat(TARGETS + %w[public/index.html])
+CLEAN.concat(ERBS + TARGETS + %w[public/index.html])
+CLOBBER.concat([SOURCE])
 
 task default: %w[kougo root]
 
@@ -78,8 +78,8 @@ file SOURCE => SOURCE + '.zip' do |t|
   sh "unzip -p #{t.source} > #{t.name}"
 end
 
-TARGETS.zip(ERBS).each do |target, erb|
-  file target => [erb, __FILE__] do |t|
+TARGETS.zip(ERBS).each do |target, erbfile|
+  file target => [erbfile, __FILE__] do |t|
     FileUtils.mkdir_p('public/kougo')
     additional_title = GLOBAL_ADDTIONAL_TITLE.dup
     if t.name.end_with?('index.html')
@@ -91,7 +91,7 @@ TARGETS.zip(ERBS).each do |target, erb|
     end
   end
 
-  file erb => SOURCE do |t|
+  file erbfile => SOURCE do |t|
     FileUtils.mkdir_p('tmp/erb')
     sh "bundle exec osis2html5 --erb #{t.source} tmp/erb/"
   end
@@ -101,5 +101,5 @@ task root: %w[public/index.html]
 
 file 'public/index.html' => 'template/index.html.erb' do |t|
   head = erb_raw('template/head.html.erb', gtag_tracking_id: GTAG_TRACKING_ID, url: URL, css: 'index')
-  erb(t.source, t.name, title: TOP_TITLE, gtag_tracking_id: GTAG_TRACKING_ID, head:)
+  erb(t.source, t.name, title: TOP_TITLE, head:)
 end
