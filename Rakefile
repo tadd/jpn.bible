@@ -17,33 +17,19 @@ TARGETS = FileList[BOOKS + %w[index]].pathmap('public/kougo/%f.html')
 SOURCE = 'vendor/kougo.osis'
 ERBS = TARGETS.pathmap('tmp/erb/%f.erb')
 GTAG_TRACKING_ID = ENV.fetch('GTAG_TRACKING_ID')
-HEAD = <<EOS.chomp
-<script async="async" src="https://www.googletagmanager.com/gtag/js?id=#{GTAG_TRACKING_ID}"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+URL = 'https://jpn.bible'
+BASE_URL = URL + '/kougo/'
 
-  gtag('config', '#{GTAG_TRACKING_ID}');
-</script>
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet"/>
-<link rel="canonical" href="%<url>s"/>
-<meta property="og:url" content="%<url>s"/>
-<link rel="stylesheet" href="/css/global.css"/>
-<link rel="icon" type="image/svg+xml" href="/img/logo.svg"/>
-<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
-EOS
-NAV = <<EOS.chomp
-<nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top">
-<a class="navbar-brand" href="/">
-<img src="/img/logo.svg" alt="jpn.bibleロゴ" width="30" height="30"/>
-jpn.bible
-</a>
-</nav>
-EOS
-BASE_URL = 'https://jpn.bible/kougo/'
+def erb_raw(source_file, vars = {})
+  ERB.new(File.read(source_file), trim_mode: '-').result_with_hash(vars)
+end
+
+def erb(source_file, dest_file, vars = {})
+  File.write(dest_file, erb_raw(source_file, vars))
+end
+
+HEAD = erb_raw('template/head.html.erb', gtag_tracking_id: GTAG_TRACKING_ID, url: URL, css: 'global')
+NAV = erb_raw('template/nav.html.erb')
 VERSION_NAME = {
   kougo: '口語訳聖書 1954/1955版'
 }
@@ -57,11 +43,6 @@ task default: %w[kougo root]
 
 desc 'generate Kougo bible HTMLs'
 task kougo: TARGETS
-
-def erb(source_file, dest_file, vars = {})
-  applied = ERB.new(File.read(source_file)).result_with_hash(vars)
-  File.write(dest_file, applied)
-end
 
 def filename_to_url(filename)
   base = File.basename(filename, '.html')
@@ -101,11 +82,11 @@ TARGETS.zip(ERBS).each do |target, erb|
   file target => [erb, __FILE__] do |t|
     FileUtils.mkdir_p('public/kougo')
     additional_title = GLOBAL_ADDTIONAL_TITLE.dup
-    additional_title.prepend(" (#{VERSION_NAME[:kougo]})") unless t.name.end_with?('index.html')
     if t.name.end_with?('index.html')
       erb(t.source, t.name, var_table(t.name, additional_title, prefetches: true))
       sh "sed -i 's/\\.html//g' #{t.name}"
     else # each book
+      additional_title.prepend(" (#{VERSION_NAME[:kougo]})")
       erb(t.source, t.name, var_table(t.name, additional_title, preloads: true))
     end
   end
@@ -119,5 +100,6 @@ end
 task root: %w[public/index.html]
 
 file 'public/index.html' => 'template/index.html.erb' do |t|
-  erb(t.source, t.name, title: TOP_TITLE, gtag_tracking_id: GTAG_TRACKING_ID)
+  head = erb_raw('template/head.html.erb', gtag_tracking_id: GTAG_TRACKING_ID, url: URL, css: 'index')
+  erb(t.source, t.name, title: TOP_TITLE, gtag_tracking_id: GTAG_TRACKING_ID, head:)
 end
