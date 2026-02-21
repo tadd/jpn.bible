@@ -2,6 +2,10 @@
     --main-font: 'Noto Serif CJK JP', 'Noto Serif JP', serif;
 }
 
+a:not(:hover) {
+    text-decoration: none;
+}
+
 body {
     line-height: 2em;
     text-align: justify;
