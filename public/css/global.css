@@ -6,6 +6,12 @@ a:not(:hover) {
     text-decoration: none;
 }
 
+@media (prefers-color-scheme: dark) {
+    .navbar-brand img {
+        filter: invert(1);
+    }
+}
+
 body {
     line-height: 2em;
     text-align: justify;
